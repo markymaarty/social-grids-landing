@@ -1,0 +1,9 @@
+SelectorAll('.billing-toggle button').forEach(x=>{x.classList.toggle('is-active',x===b);x.setAttribute('aria-pressed',x===b?'true':'false')});
+  const annual=b.dataset.billing==='annual';
+  document.querySelectorAll('.pricing-card').forEach(card=>{
+    const m=+card.dataset.monthly;const el=card.querySelector('[data-price]');
+    if(!el)return;el.textContent=annual?Math.round(m*0.8):m;
+  });
+});
+</script>
+</body></html>
