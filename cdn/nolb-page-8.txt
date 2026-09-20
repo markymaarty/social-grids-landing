@@ -1,0 +1,54 @@
+      btn.setAttribute("aria-expanded","true");
+        const a=item.querySelector(".faq__a");
+        const ic=item.querySelector(".faq__icon");
+        if(a) a.hidden=false;
+        if(ic) ic.textContent="−";
+      }
+    });
+  });
+
+  const bill=document.querySelector(".billing-toggle");
+  if(bill){
+    bill.addEventListener("click", e=>{
+      const b=e.target.closest("button[data-billing]");
+      if(!b) return;
+      const mode=b.getAttribute("data-billing");
+      bill.querySelectorAll("button").forEach(x=>{
+        const on=x===b;
+        x.classList.toggle("is-active", on);
+        x.setAttribute("aria-pressed", on?"true":"false");
+      });
+      document.querySelectorAll(".pricing-card").forEach(card=>{
+        const m=parseFloat(card.getAttribute("data-monthly")||"0");
+        const amt=card.querySelector("[data-amount]");
+        const per=card.querySelector("[data-period]");
+        if(!amt) return;
+        if(m===0){ amt.textContent="$0"; if(per) per.textContent=""; return; }
+        const val = mode==="annual" ? (m*0.8) : m;
+        amt.textContent="$"+(val%1?val.toFixed(2):String(Math.round(val*100)/100));
+        if(per) per.textContent="/mo";
+      });
+    });
+  }
+
+  const burger=document.getElementById("burger");
+  const drawer=document.getElementById("drawer");
+  if(burger&&drawer){
+    burger.addEventListener("click",()=>{
+      const open=drawer.classList.toggle("is-open");
+      burger.setAttribute("aria-expanded", open?"true":"false");
+    });
+    drawer.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+      drawer.classList.remove("is-open");
+      burger.setAttribute("aria-expanded","false");
+    }));
+  }
+
+  const nav=document.getElementById("nav");
+  if(nav){
+    const onScroll=()=>nav.classList.toggle("is-scrolled", window.scrollY>20);
+    window.addEventListener("scroll", onScroll, {passive:true});
+    onScroll();
+  }
+})();
+</script></body></html>
