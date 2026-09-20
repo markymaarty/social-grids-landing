@@ -1,0 +1,7 @@
+.textContent=btn.dataset.cap;document.getElementById('lbt').textContent=btn.dataset.ts+' ago';document.getElementById('lbl').textContent='♥ '+btn.dataset.likes;document.getElementById('lbco').textContent='💬 '+btn.dataset.comments;lb.hidden=false;document.body.style.overflow='hidden'};
+const close=()=>{lb.hidden=true;document.body.style.overflow=''};
+document.getElementById('lbc').onclick=close;lb.onclick=e=>{if(e.target===lb)close()};document.getElementById('lbp').onclick=e=>e.stopPropagation();
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
+document.querySelectorAll('.demo-tile').forEach(b=>b.onclick=()=>open(b));
+})();
+</script></body></html>
